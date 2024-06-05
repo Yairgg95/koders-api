@@ -1,11 +1,11 @@
 const express = require('express')
 const kodersUseCase = require('../usecases/koders.usecase');
+const auth = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
 // GET /koders
-
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const koders = await kodersUseCase.getAll();
         res.json({
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 })
 
 // GET /koders/:id
-router.get('/:id', async ( req, res) => {
+router.get('/:id', auth, async ( req, res) => {
     try {
         // const id = req.params.id
         const { id } = req.params;
@@ -60,7 +60,7 @@ router.get('/:id', async ( req, res) => {
 
 // DELETE /koders/:id
 
-router.delete('/:id', async ( req, res) => {
+router.delete('/:id', auth, async ( req, res) => {
     try {
         // const id = req.params.id
         const { id } = req.params;
@@ -80,7 +80,7 @@ router.delete('/:id', async ( req, res) => {
 
 // PATCH /koders/:id
 
-router.patch('/:id', async ( req, res) => {
+router.patch('/:id', auth, async ( req, res) => {
     try {
         // const id = req.params.id
         const { id } = req.params;
